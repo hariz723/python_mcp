@@ -131,3 +131,22 @@ class SecurityManager:
                 raise NotADirectoryError(f"Expected a directory, but found a file: {path}")
 
         return path
+    def validate_file_path(self, path_str: str | Path, must_exist: bool = False) -> Path:
+        """Validate that the given path refers to a regular file.
+
+        This is a thin wrapper around :meth:`validate_path` that always
+        requires the path to be a regular file.  The ``must_exist`` flag
+        behaves exactly like in :meth:`validate_path` – if ``True`` the
+        method will raise :class:`FileNotFoundError` when the file does
+        not exist.
+
+        Args:
+            path_str: Path to validate.
+            must_exist: If ``True`` the file must exist.
+
+        Returns:
+            Path: The resolved path.
+        """
+        # The ``must_be_file`` flag enforces that the path points to a
+        # regular file.  ``must_exist`` is passed through unchanged.
+        return self.validate_path(path_str, must_exist=must_exist, must_be_file=True)

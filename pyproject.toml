@@ -1,15 +1,17 @@
 [project]
 name = "python-mcp"
 version = "0.1.0"
-description = "Prompt-driven System File Manipulation MCP Server"
+description = "Prompt-driven System File Manipulation powered by Ollama gpt-oss & MCP"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "mcp[cli]>=2.2.0",
+    "ollama>=0.6.2",
+    "rich>=13.0.0",
 ]
 
 [project.scripts]
-python-mcp = "python_mcp.server:main"
+python-mcp = "python_mcp.cli:main"
 
 [build-system]
 requires = ["hatchling"]
